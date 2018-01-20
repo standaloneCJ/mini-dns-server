@@ -1,7 +1,7 @@
-DNS
+MINI DNS
 ===
 
-A mini dns server
+A mini dns server for nodejs
 
 ## Installation
 	npm i -g mini-dns-server
