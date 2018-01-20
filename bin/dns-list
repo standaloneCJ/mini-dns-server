@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+const utils = require('../lib/utils')
+const path = require('path')
+
+const configPath =  path.join(__dirname, '../lib/config.json')
+let config = utils.readConfig(configPath)
+console.log(config.router)

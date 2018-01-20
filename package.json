@@ -1,0 +1,26 @@
+{
+  "name": "mini-dns-server",
+  "version": "1.0.1",
+  "description": "mini dns server",
+  "main": "./lib/server.js",
+  "bin": {
+    "dns": "bin/dns",
+    "dns-list": "bin/dns-list",
+    "dns-start": "bin/dns-start"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "dns",
+    "dns server"
+  ],
+  "author": "Tim",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.13.0"
+  }
+}

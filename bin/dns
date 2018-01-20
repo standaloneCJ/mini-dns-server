@@ -1,0 +1,67 @@
+#!/usr/bin/env node
+
+
+const program = require('commander')
+const path = require('path')
+const utils = require('../lib/utils')
+
+const configPath =  path.join(__dirname, '../lib/config.json')
+
+program.version(require('../package').version)
+.usage('<command> [options]')
+.command('start', 'Start dns server on port 53')
+.command('list', 'Show local domain list')
+
+program
+.command('reset')
+.description('Reset config')
+.action(function () {
+    let config = {
+        router: {},
+        upstream: '8.8.8.8'
+    }
+    utils.writeConfig(configPath, config)
+});
+
+program
+.command('add')
+.description('Add router  (see also: dns add --help)')
+.option("-d, --domain <mode>", "domain")
+.option("-i, --ip <mode>", "ip address")
+.action(function (options) {
+    if (!options.domain || !options.ip) {
+        utils.exec('dns add --help')
+        return
+    }
+    let router = {}
+    router[options.domain] = options.ip
+    let config = utils.readConfig(configPath)
+    Object.assign(config.router, router)
+    utils.writeConfig(configPath, config)
+
+
+}).on('--help', function () {
+    console.log('  Examples:');
+    console.log('  $ dns add -i 127.0.0.1 -d abc.com ')
+});
+
+program
+.command('upstream')
+.description('Update upstream  (see also: dns upstream --help)')
+.option("-i, --ip <mode>", "domain")
+.action(function (options) {
+    if (!options.ip) {
+        utils.exec('dns upstream --help')
+        return
+    }
+    let config = utils.readConfig(configPath);
+    config.upstream = options.ip
+    utils.writeConfig(configPath, config)
+
+}).on('--help', function () {
+    console.log('  Examples:');
+    console.log('  $ dns upstream  -i 8.8.8.8')
+});
+
+program.parse(process.argv)
+
