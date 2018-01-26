@@ -1,23 +1,25 @@
 MINI DNS
 ===
 
-A simple and mini dns server for nodejs
+A simple and mini DNS Server for nodejs
 
 ## Installation
 	npm i -g mini-dns-server
 
-## Usage
+## Configuration
 
-	sudo dns start
-
-## Add router
+### Add router
 
 	dns add -i 127.0.0.1 -d www.xxx.com
 
-## Reset router
+### Reset router
 
 	dns reset
 
-## Change upstream dns server
+### Change upstream dns server
 
 	dns upstream -i 8.8.8.8
+
+## Usage
+
+	sudo dns start
